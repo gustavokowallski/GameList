@@ -4,11 +4,11 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 @Entity
-@Table(name= "tb_games")
+@Table(name= "tb_game")
 public class Games {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -18,7 +18,9 @@ public class Games {
     private String platforms;
     private Double score;
     private String imgUrl;
+    @Column(columnDefinition = "TEXT")
     private String shortDescription;
+    @Column(columnDefinition = "TEXT")
     private String longDescription;
 
 
@@ -30,8 +32,9 @@ public class Games {
         this.title = title;
         this.year = year;
         this.genre = genre;
-        this.score = score;
+
         this.platforms = platforms;
+        this.score = score;
         this.imgUrl = imgUrl;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
