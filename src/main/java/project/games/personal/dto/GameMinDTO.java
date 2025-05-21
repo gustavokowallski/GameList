@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import project.games.personal.entities.Games;
+import project.games.personal.projections.GameMinProjection;
 
 public class GameMinDTO {
 
@@ -29,6 +30,13 @@ public class GameMinDTO {
         this.imgUrl = entity.getImgUrl();
         this.year = entity.getYear();
         this.title = entity.getTitle();
+    }
+    public GameMinDTO(GameMinProjection projection) {
+        this.id = projection.getId();
+        this.shortDescription = projection.getShortDescription();
+        this.imgUrl = projection.getImgUrl();
+        this.year = projection.getYear();
+        this.title = projection.getTitle();
     }
 
     public Long getId() {
