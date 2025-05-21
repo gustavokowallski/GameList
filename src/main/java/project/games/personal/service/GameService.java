@@ -24,19 +24,21 @@ public class GameService {
     }
     public void deleteGame(Long id){
         gameRepository.deleteById(id);
-        System.out.println("Usuário Removido com sucesso");
 
-    }*/
-    public List<GameMinDTO> findAll(){
+*
+
+     */
+
+    public List<GameMinDTO> findAll() {
 
         List<Games> result = gameRepository.findAll();
-        return result.stream().map(x-> new GameMinDTO(x)).toList();
-
-        }
-
-
+        return result.stream().map(x -> new GameMinDTO(x)).toList();
 
     }
+}
+
+
+
 
 
 
