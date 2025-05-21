@@ -2,6 +2,8 @@ package project.games.personal.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import project.games.personal.dto.GameDTO;
 import project.games.personal.dto.GameMinDTO;
 import project.games.personal.entities.Games;
 import project.games.personal.repository.GameRepository;
@@ -16,19 +18,14 @@ public class GameService {
     @Autowired
     private GameRepository gameRepository;
 
+    @Transactional(readOnly = true)
+   public GameDTO findById(Long id){
+       Games games = gameRepository.findById(id).get();
+       return new GameDTO(games);
 
-    /*public Games createGame(Games game){
-        gameRepository.save(game);
-        return game;
+   }
 
-    }
-    public void deleteGame(Long id){
-        gameRepository.deleteById(id);
-
-*
-
-     */
-
+    @Transactional(readOnly = true)
     public List<GameMinDTO> findAll() {
 
         List<Games> result = gameRepository.findAll();
