@@ -1,12 +1,9 @@
 package project.games.personal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import project.games.personal.dto.GameMinDTO;
+import project.games.personal.dto.ReplacementDTO;
 import project.games.personal.service.GameListService;
 import project.games.personal.service.GameService;
 
@@ -23,6 +20,13 @@ public class GameListController {
     @GetMapping(value = "/{listId}/games")
     public List<GameMinDTO> findByList(@PathVariable Long listId){
         return gameService.findByList(listId);
+
+    }
+    @PostMapping(value = "/{listId}/replacement")
+    public void replacePosition(@PathVariable Long listId,@RequestBody ReplacementDTO source){
+        gameListService.movePosition(listId, source.getSourceIndex(), source.getDestinationIndex());
+
+
 
     }
 
