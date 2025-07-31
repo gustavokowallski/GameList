@@ -94,5 +94,4 @@ Você pode testar os endpoints da API utilizando esta coleção pública do Post
 ## Autor
 
 **Gustavo Eiji Kowalski Hatada**
-* [Seu perfil do GitHub](https://github.com/gustavokowallski) (Opcional, mas muito recomendado!)
-* [Seu perfil do LinkedIn](https://www.linkedin.com/in/seu-perfil-linkedin) (Opcional, mas muito recomendado!)
+
