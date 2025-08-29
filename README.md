@@ -1,75 +1,78 @@
-# GameList - Organize seus Jogos Favoritos
+# 🎮 GameList - Organize seus Jogos Favoritos
 
-## License
+![Java](https://img.shields.io/badge/Java-21-blue)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1-brightgreen)
+![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue)
+![Docker](https://img.shields.io/badge/docker-enabled-blue)
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
-[MIT License](https://github.com/gustavokowallski/dslist/blob/main/LICENSE)
+---
 
-https://dslist-production-55f3.up.railway.app
+> 📢 Projeto focado em backend com Java + Spring Boot, com deploy no Railway e suporte completo a reordenação de listas de jogos.
 
-## Sobre o Projeto GameList
+---
 
-O **GameList** é uma aplicação web backend desenvolvida com o objetivo de gerenciar listas de jogos de forma personalizada e intuitiva.
+## 🔎 Sobre o Projeto
 
-O projeto permite que usuários visualizem jogos cadastrados, criem suas próprias listas e organizem os jogos de acordo com suas preferências, podendo inclusive reordenar os jogos dentro de uma mesma lista.
+O **GameList** é uma API REST que permite a gestão de listas personalizadas de jogos, com visualização, organização e reordenação de jogos cadastrados.
 
-Este projeto foi desenvolvido com foco em boas práticas de programação, utilização de ferramentas modernas no back-end e arquitetura limpa.
+O projeto foi desenvolvido com foco em boas práticas, organização em camadas e arquitetura limpa.
 
-## Funcionalidades do Projeto
+---
 
-* Visualização de jogos disponíveis no sistema
-* Criação de listas personalizadas de jogos
-* Inclusão de jogos em listas específicas
-* Alteração da ordem dos jogos dentro de uma lista
-* Separação de responsabilidades via camadas: controller, service e repository
-* Utilização de modelo conceitual baseado em relacionamento entre entidades `Game` e `GameList`
+## 🧩 Funcionalidades
 
-## Modelo Conceitual / Diagrama de Domínio
+- 🔍 Visualizar todos os jogos cadastrados  
+- 📝 Criar e gerenciar listas de jogos  
+- 🔄 Reordenar jogos dentro de uma lista  
+- 🔗 Associação entre jogos e listas via entidade intermediária  
+- ✅ Separação por camadas: Controller, Service, Repository  
 
-O modelo de domínio do GameList possui as seguintes entidades principais:
+---
 
-* **Game**: representa um jogo com informações como nome, capa, descrição, gênero, etc.
-* **GameList**: representa uma lista personalizada de jogos.
-* **BelongsTo**: representa a associação entre jogos e listas, com uma posição definida para cada jogo na lista.
+## 🧱 Modelo Conceitual
 
-## Tecnologias Utilizadas
+O modelo de domínio contém:
 
-### Back-end
+- **Game**: entidade principal com título, capa, gênero, descrição, etc  
+- **GameList**: coleção personalizada de jogos criada pelo usuário  
+- **BelongsTo**: relação entre `Game` e `GameList`, com posição (posição do jogo na lista)
 
-* Java 21
-* Spring Boot
-* JPA / Hibernate
-* Maven
-* API REST
-* PostgreSQL (para persistência de dados)
-* Docker (utilizado no processo de deploy)
 
-### Front-end
 
-* Não utilizado neste projeto (foco exclusivo no back-end da API).
+---
 
-## Como Executar o Projeto Localmente
+## 🧰 Tecnologias Utilizadas
 
-**Pré-requisitos:**
+- Java 21  
+- Spring Boot  
+- Spring Data JPA / Hibernate  
+- PostgreSQL  
+- Docker  
+- Maven  
+- API REST  
 
-* Java Development Kit (JDK) 21+
-* Maven (ou utilize o wrapper `./mvnw`)
-* Banco de Dados PostgreSQL (rodando localmente ou em um serviço externo)
+---
 
-**Passos:**
+## ⚙️ Como Executar Localmente
 
-1.  **Clonar o repositório:**
-    ```bash
-    git clone [https://github.com/gustavokowallski/GameList.git](https://github.com/gustavokowallski/GameList.git)
-    ```
-2.  **Entrar na pasta do projeto:**
-    ```bash
-    cd GameList # Alterado de 'dslist' para 'GameList' para corresponder ao repositório
-    ```
+### Pré-requisitos
+- JDK 21+  
+- PostgreSQL rodando localmente  
+- Maven instalado (ou use `./mvnw`)
 
-3.  **Executar o projeto:**
-    ```bash
-    ./mvnw spring-boot:run
-    ```
+### Passos
+
+```bash
+# Clone o repositório
+git clone https://github.com/gustavokowallski/GameList.git
+cd GameList
+```
+# Execute a aplicação
+```bash
+./mvnw spring-boot:run
+```
+
     O projeto será executado em `http://localhost:8080` por padrão. (Mais abaixo tem o link do Postman para teste, apenas troque a URL para a local).
 
 ## Deploy
@@ -91,7 +94,10 @@ Você pode testar os endpoints da API utilizando esta coleção pública do Post
 3.  Certifique-se de que a variável de ambiente `baseUrl` (ou similar) na coleção esteja configurada para a URL do seu deploy: `https://dslist-production-55f3.up.railway.app`
 4.  Execute as requisições para testar as funcionalidades da API.
 
-## Autor
+---
 
-**Gustavo Eiji Kowalski Hatada**
+## 👨‍💻 Autor
+
+**Gustavo Eiji Kowalski Hatada**  
+[![LinkedIn Badge](https://img.shields.io/badge/-Gustavo%20Kowalski-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/gustavo-kowalski-94234b322/)
 
