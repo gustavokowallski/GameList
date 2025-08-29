@@ -99,5 +99,5 @@ Você pode testar os endpoints da API utilizando esta coleção pública do Post
 ## 👨‍💻 Autor
 
 **Gustavo Eiji Kowalski Hatada**  
-[![LinkedIn Badge](https://img.shields.io/badge/-Gustavo%20Kowalski-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/gustavo-kowalski-94234b322/)
+[![LinkedIn Badge](https://img.shields.io/badge/-Gustavo%20Kowalski-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/gustavokowalski/)
 
