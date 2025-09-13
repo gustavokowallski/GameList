@@ -25,10 +25,10 @@ import java.util.List;
 @Service
 public class JwtTokenProvider {
 
-    @Value("{security.jwt.token.secret-key:secret}")
+    @Value("${security.jwt.token.secret-key:secret}")
     private String secretKey = "secret";
 
-    @Value("{security.jwt.token.expiration-lenght:360000}")
+    @Value("${security.jwt.token.expiration-lenght:360000}")
     private long validityInMilliseconds = 3600000;
 
     @Autowired
@@ -69,8 +69,7 @@ public class JwtTokenProvider {
 
 
     private String getRefreshToken(String username, List<String> roles, Date now) {
-        Date refreshTokenValidity = new Date(now.getTime() + validityInMilliseconds);
-        ;
+        Date refreshTokenValidity = new Date(now.getTime() + (validityInMilliseconds * 3));
         return JWT.create()
                 .withClaim("roles", roles)
                 .withIssuedAt(now)
@@ -98,21 +97,17 @@ public class JwtTokenProvider {
     public String resolveToken(HttpServletRequest request){
         String bearerToken = request.getHeader("Authorization");
 
-        if(StringUtils.isEmpty(bearerToken) && bearerToken.startsWith("Bearer ")){
-            return  bearerToken.substring("Bearer ".length());
-        }else{
-            throw new InvalidJwtAuthenticationException("Invalid JWT Token");
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring("Bearer ".length());
         }
+        throw new InvalidJwtAuthenticationException("Invalid JWT Token");
+
     }
 
     public boolean validateToken(String token){
-        DecodedJWT decodedJWT = decodedToken(token);
-
         try {
-            if(decodedJWT.getExpiresAt().before(new Date())){
-                return false;
-            }
-            return true;
+            DecodedJWT decodedJWT = decodedToken(token);
+            return !decodedJWT.getExpiresAt().before(new Date());
         } catch (Exception e) {
             throw new InvalidJwtAuthenticationException("Expired or Invalid JWT Token");
         }
