@@ -1,7 +1,12 @@
 package project.games.personal.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.time.Instant;
 
+@Entity
+@Table(name = "tb_users")
 public class User {
     private Long id;
     private String name;
