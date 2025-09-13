@@ -1,22 +1,23 @@
 package project.games.personal.entities;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name = "tb_roles")
-public class Role {
+public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String authorities;
+    private String authority;
 
 
 
     public Role(){}
 
-    public Role(Long id, String authorities) {
+    public Role(Long id, String authority) {
         this.id = id;
-        this.authorities = authorities;
+        this.authority = authority;
     }
 
     public Long getId() {
@@ -27,11 +28,14 @@ public class Role {
         this.id = id;
     }
 
-    public String getAuthorities() {
-        return authorities;
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 
-    public void setAuthorities(String authorities) {
-        this.authorities = authorities;
+
+    @Override
+    public String getAuthority() {
+        return authority;
     }
 }
