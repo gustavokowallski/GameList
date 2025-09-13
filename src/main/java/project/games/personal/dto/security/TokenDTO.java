@@ -12,7 +12,7 @@ public class TokenDTO implements Serializable {
     private String token;
     private String refreshToken;
 
-    public TokenDTO(){}
+    public TokenDTO(String username, boolean b, Date now, Date validity, String acessToken, String refreshToken){}
 
     public TokenDTO(String email, String refreshToken, String token, Date expiration,
                     Date createdAt, Boolean authenticated) {
