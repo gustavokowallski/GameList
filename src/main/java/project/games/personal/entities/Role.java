@@ -1,12 +1,20 @@
 package project.games.personal.entities;
 
-public class Roles {
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "tb_roles")
+public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String authorities;
 
-    public Roles(){}
 
-    public Roles(Long id, String authorities) {
+
+    public Role(){}
+
+    public Role(Long id, String authorities) {
         this.id = id;
         this.authorities = authorities;
     }
