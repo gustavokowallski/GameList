@@ -13,7 +13,6 @@ import project.games.personal.repository.GameRepository;
 
 import java.util.List;
 
-
 @Service
 public class GameService {
     @Autowired
@@ -23,9 +22,8 @@ public class GameService {
    public GameDTO findById(Long id){
        Games game = gameRepository.findById(id).
                orElseThrow(() -> new ResourceNotFoundException("Id " + id + " does not correspond to any game"));
-       
-       return GameMapper.entityToFullDto(game);
 
+       return GameMapper.entityToFullDto(game);
    }
 
     @Transactional(readOnly = true)
