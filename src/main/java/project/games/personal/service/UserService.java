@@ -50,7 +50,6 @@ public class UserService implements UserDetailsService {
 
     @Transactional(readOnly = false)
     public UserDTO createUser(InsertUserDTO dto){
-
         if(userRepository.findByEmail(dto.getEmail()).isPresent()){
             throw new ConflictException("Email already exists");
 

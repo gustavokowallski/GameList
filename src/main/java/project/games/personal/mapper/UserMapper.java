@@ -9,14 +9,12 @@ public class UserMapper {
 
     public static User toEntity(InsertUserDTO dto){
         User user = new User();
-        user.setEmail(dto.getEmail());
         user.setName(dto.getName());
-
-
+        user.setEmail(dto.getEmail());
         return user;
     }
 
     public static UserDTO toDto(User user){
-        return new UserDTO(user.getId(), user.getEmail(), user.getUsername());
+        return new UserDTO(user.getId(), user.getEmail(), user.getName());
     }
 }
