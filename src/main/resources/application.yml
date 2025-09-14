@@ -12,9 +12,9 @@ cors:
 
 security:
   jwt:
-    token:
-      secret-key: 53cr37
-      expire-lenght: 360000
+    secret: my-secret
+    expiration: 3600000
+
 
 # test
 ---

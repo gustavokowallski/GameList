@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "tb_users")
+@Table(name = "tb_user")
 public class User implements UserDetails {
 
     @Id
@@ -19,7 +19,7 @@ public class User implements UserDetails {
     private String name;
     private String email;
     private String password;
-    private Instant createdAt;
+
 
     @ManyToMany
     @JoinTable(name = "tb_user_role",
@@ -29,12 +29,11 @@ public class User implements UserDetails {
 
     public User(){}
 
-    public User(Long id, String name, String email, String password, Instant createdAt) {
+    public User(Long id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.createdAt = createdAt;
     }
 
     public Long getId() {
@@ -44,16 +43,6 @@ public class User implements UserDetails {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
-
-
 
     public void setPassword(String password) {
         this.password = password;

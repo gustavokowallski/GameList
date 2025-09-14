@@ -1,27 +1,24 @@
 package project.games.personal.dto.security;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
 public class TokenDTO implements Serializable {
 
     private String email;
-    private Boolean authenticated;
-    private Date createdAt;
-    private Date expiration;
+    private Instant createdAt;
+
     private String token;
-    private String refreshToken;
+    private Instant expiresAt;
 
-    public TokenDTO(String username, boolean b, Date now, Date validity, String acessToken, String refreshToken){}
+    public TokenDTO(){}
 
-    public TokenDTO(String email, String refreshToken, String token, Date expiration,
-                    Date createdAt, Boolean authenticated) {
+    public TokenDTO(String email, String token, Instant createdAt, Instant expiresAt) {
         this.email = email;
-        this.refreshToken = refreshToken;
         this.token = token;
-        this.expiration = expiration;
         this.createdAt = createdAt;
-        this.authenticated = authenticated;
+        this.expiresAt = expiresAt;
     }
 
     public String getEmail() {
@@ -32,30 +29,6 @@ public class TokenDTO implements Serializable {
         this.email = email;
     }
 
-    public Boolean getAuthenticated() {
-        return authenticated;
-    }
-
-    public void setAuthenticated(Boolean authenticated) {
-        this.authenticated = authenticated;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getExpiration() {
-        return expiration;
-    }
-
-    public void setExpiration(Date expiration) {
-        this.expiration = expiration;
-    }
-
     public String getToken() {
         return token;
     }
@@ -64,11 +37,19 @@ public class TokenDTO implements Serializable {
         this.token = token;
     }
 
-    public String getRefreshToken() {
-        return refreshToken;
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Instant getExpiresAt() {
+        return expiresAt;
+    }
+
+    public void setExpiresAt(Instant expiresAt) {
+        this.expiresAt = expiresAt;
     }
 }
