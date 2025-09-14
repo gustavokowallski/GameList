@@ -12,7 +12,10 @@ import project.games.personal.entities.Role;
 import project.games.personal.entities.User;
 import project.games.personal.exception.ConflictException;
 import project.games.personal.mapper.UserMapper;
+import project.games.personal.projections.UserDetailsProjection;
 import project.games.personal.repository.UserRepository;
+
+import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -30,8 +33,19 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User does not exist"));
+        List<UserDetailsProjection> result = userRepository.searchUserAndRolesByEmail(username);
+        if (result.isEmpty()) {
+            throw new UsernameNotFoundException("Email not found");
+        }
+
+        User user = new User();
+        user.setEmail(result.get(0).getUsername());
+        user.setPassword(result.get(0).getPassword());
+        for (UserDetailsProjection projection : result) {
+            user.addRole(new Role(projection.getRoleId(), projection.getAuthority()));
+        }
+
+        return user;
     }
 
     @Transactional(readOnly = false)
