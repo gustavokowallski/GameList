@@ -10,7 +10,6 @@ import project.games.personal.dto.security.TokenDTO;
 import project.games.personal.security.jwt.JwtTokenProvider;
 
 import java.time.Instant;
-import java.util.Date;
 
 @Service
 public class AuthService {
@@ -23,7 +22,7 @@ public class AuthService {
         this.jwtProvider = jwtProvider;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public TokenDTO login(AccountCredentialsDTO dto) {
         Authentication auth = authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword()));

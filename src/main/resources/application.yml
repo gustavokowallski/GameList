@@ -1,8 +1,6 @@
 spring:
   profiles:
     active: ${APP_PROFILE:test}
-  server:
-    port: 80
 
   jpa:
     open-in-view: false

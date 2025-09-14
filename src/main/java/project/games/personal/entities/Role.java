@@ -11,8 +11,6 @@ public class Role implements GrantedAuthority {
     private Long id;
     private String authority;
 
-
-
     public Role(){}
 
     public Role(Long id, String authority) {
@@ -27,7 +25,6 @@ public class Role implements GrantedAuthority {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public void setAuthority(String authority) {
         this.authority = authority;
