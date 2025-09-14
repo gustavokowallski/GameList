@@ -6,12 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 import project.games.personal.dto.GameDTO;
 import project.games.personal.dto.GameMinDTO;
 import project.games.personal.entities.Games;
+import project.games.personal.mapper.GameMapper;
 import project.games.personal.projections.GameMinProjection;
 import project.games.personal.repository.GameRepository;
 
-import java.util.ArrayList;
 import java.util.List;
-//
 
 
 @Service
@@ -21,16 +20,16 @@ public class GameService {
 
     @Transactional(readOnly = true)
    public GameDTO findById(Long id){
-       Games games = gameRepository.findById(id).get();
-       return new GameDTO(games);
+       Games game = gameRepository.findById(id).get();
+       return GameMapper.entityToFullDto(game);
 
    }
 
     @Transactional(readOnly = true)
-    public List<GameMinDTO> findByList(Long listid) {
+    public List<GameMinDTO> findByList(Long listId) {
 
-        List<GameMinProjection> result = gameRepository.searchByList(listid);
-        return result.stream().map(x -> new GameMinDTO(x)).toList();
+        List<GameMinProjection> result = gameRepository.searchByList(listId);
+        return result.stream().map(GameMapper::projectionToMinDto).toList();
 
     }
 
@@ -38,8 +37,7 @@ public class GameService {
     public List<GameMinDTO> findAll() {
 
         List<Games> result = gameRepository.findAll();
-        return result.stream().map(x -> new GameMinDTO(x)).toList();
-
+        return result.stream().map(GameMapper::entityToMinDto).toList();
     }
 }
 

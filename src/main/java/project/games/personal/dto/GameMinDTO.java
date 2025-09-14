@@ -1,6 +1,5 @@
 package project.games.personal.dto;
 
-import project.games.personal.entities.Games;
 import project.games.personal.projections.GameMinProjection;
 
 public class GameMinDTO {
@@ -16,17 +15,14 @@ public class GameMinDTO {
 
     private String shortDescription;
 
-    public GameMinDTO(){
-
+    public GameMinDTO(Long id, String title, Integer year, String imgUrl, String shortDescription){
+        this.id = id;
+        this.shortDescription = shortDescription;
+        this.imgUrl = imgUrl;
+        this.year = year;
+        this.title = title;
     }
 
-    public GameMinDTO(Games entity) {
-        this.id = entity.getId();
-        this.shortDescription = entity.getShortDescription();
-        this.imgUrl = entity.getImgUrl();
-        this.year = entity.getYear();
-        this.title = entity.getTitle();
-    }
     public GameMinDTO(GameMinProjection projection) {
         this.id = projection.getId();
         this.shortDescription = projection.getShortDescription();
