@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import project.games.personal.dto.GameDTO;
 import project.games.personal.dto.GameMinDTO;
 import project.games.personal.entities.Games;
+import project.games.personal.exception.ResourceNotFoundException;
 import project.games.personal.mapper.GameMapper;
 import project.games.personal.projections.GameMinProjection;
 import project.games.personal.repository.GameRepository;
@@ -20,7 +21,9 @@ public class GameService {
 
     @Transactional(readOnly = true)
    public GameDTO findById(Long id){
-       Games game = gameRepository.findById(id).get();
+       Games game = gameRepository.findById(id).
+               orElseThrow(() -> new ResourceNotFoundException("Id " + id + " does not correspond to any game"));
+       
        return GameMapper.entityToFullDto(game);
 
    }
