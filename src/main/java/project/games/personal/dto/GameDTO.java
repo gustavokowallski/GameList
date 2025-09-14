@@ -19,8 +19,20 @@ public class GameDTO {
     private String shortDescription;
     private String longDescription;
 
-    public GameDTO(Games game) {
-        BeanUtils.copyProperties(game, this);
+    public GameDTO(){
+
+    }
+
+    public GameDTO(Long id, String title, String genre, Integer year, String platforms, String imgUrl, Double score, String longDescription, String shortDescription) {
+        this.id = id;
+        this.title = title;
+        this.genre = genre;
+        this.year = year;
+        this.platforms = platforms;
+        this.imgUrl = imgUrl;
+        this.score = score;
+        this.longDescription = longDescription;
+        this.shortDescription = shortDescription;
     }
 
     public Long getId() {
@@ -59,39 +71,5 @@ public class GameDTO {
         return title;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public void setLongDescription(String longDescription) {
-        this.longDescription = longDescription;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public void setYear(Integer year) {
-        this.year = year;
-    }
-
-    public void setPlatforms(String platforms) {
-        this.platforms = platforms;
-    }
-
-    public void setScore(Double score) {
-        this.score = score;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
 }

@@ -1,0 +1,70 @@
+package project.games.personal.security.jwt;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+import java.util.Date;
+
+@Service
+public class JwtTokenProvider {
+
+    @Value("${security.jwt.secret}")
+    private String secret;
+
+    @Value("${security.jwt.expiration}")
+    private long expiration;
+
+    private Algorithm algorithm;
+
+    @PostConstruct
+    public void init() {
+        algorithm = Algorithm.HMAC256(secret);
+    }
+
+    public String createToken(String username, Collection<? extends GrantedAuthority> roles) {
+        Date now = new Date();
+        Date expiry = new Date(now.getTime() + expiration);
+
+        return JWT.create()
+                .withSubject(username)
+                .withClaim("roles", roles.stream().map(GrantedAuthority::getAuthority).toList())
+                .withIssuedAt(now)
+                .withExpiresAt(expiry)
+                .sign(algorithm);
+    }
+
+    public String getUsername(String token) {
+        return JWT.require(algorithm).build().verify(token).getSubject();
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            JWT.require(algorithm).build().verify(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public String resolveToken(HttpServletRequest request) {
+        String bearer = request.getHeader("Authorization");
+        if (bearer != null && bearer.startsWith("Bearer ")) {
+            return bearer.substring(7);
+        }
+        return null;
+    }
+
+    public long getValidityMs() {
+        return expiration;
+    }
+}
+
+
+

@@ -1,0 +1,34 @@
+package project.games.personal.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import project.games.personal.dto.InsertUserDTO;
+import project.games.personal.dto.UserDTO;
+import project.games.personal.service.UserService;
+
+import java.net.URI;
+
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    private final UserService userService;
+
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<UserDTO> createUser(@RequestBody InsertUserDTO dto){
+        UserDTO result = userService.createUser(dto);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(result.getId()).toUri();
+        return ResponseEntity.created(uri).body(result);
+    }
+}
