@@ -1,9 +1,5 @@
 package project.games.personal.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import project.games.personal.entities.Games;
 import project.games.personal.projections.GameMinProjection;
 
