@@ -1,103 +1,81 @@
-# 🎮 GameList - Organize seus Jogos Favoritos
+#  GameList 
 
-![Java](https://img.shields.io/badge/Java-21-blue)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1-brightgreen)
-![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue)
-![Docker](https://img.shields.io/badge/docker-enabled-blue)
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
+Aplicação backend para organização de listas de jogos, desenvolvida com foco em **boas práticas, separação de camadas, arquitetura limpa e deploy em produção via Railway**. Projeto ideal para consolidar conhecimentos em **Spring Boot + PostgreSQL + Docker**, com suporte completo a reordenação de listas.
+
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=java,spring,postgres,docker" />
+  </a>
+</p>
+<p align="center">
+<img src="https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Deploy-Railway-purple?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" />
+</p>
+
+## Visão Geral do Projeto
+
+O **GameList** é uma aplicação backend REST para gerenciamento de listas personalizadas de jogos.
+
+### 🔹 Antes da Refatoração
+
+O projeto foi originalmente desenvolvido como um exercício introdutório para praticar:
+- CRUD simples com **Java + Spring Boot**
+- Relacionamentos básicos (`Game`, `GameList`, `BelongsTo`)
+- Deploy com **Railway** para exposição pública da API
+
+No entanto, não havia:
+- Tratamento de exceções estruturado
+- Validações adequadas dos dados
+- Separação total de responsabilidades (camadas estavam acopladas)
+- Cobertura com testes automatizados
+
+
+
+### 🔸 Depois da Refatoração
+
+A nova versão do projeto evoluiu para um backend **muito mais robusto e alinhado com padrões profissionais**, incluindo:
+
+-  Arquitetura em **camadas bem definidas** (`Controller`, `Service`, `DTO`, `Exception`, `Mapper`) ✔️
+-  Aplicação de princípios **SOLID** ✔️
+-  **Validações automáticas** com Bean Validation (`@NotNull`, `@Size`, etc.) ✔️
+-  **Tratamento global de erros** via `@ControllerAdvice` ✔️
+-  **Testes unitários** com foco em regras de negócio ✔️
+-  Estrutura pronta para evoluir com novas features ✔️
+
+> 🔄 Essa refatoração não apenas elevou a qualidade do projeto, como também mostra meu domínio crescente sobre boas práticas, testes, e design limpo em aplicações reais com Spring Boot.
+
+##  Aprendizados Técnicos
+
+- Manipulação de relacionamentos complexos com JPA (ManyToMany com entidade intermediária) ✔️  
+- Uso de projeções com Spring Data JPA para melhorar a performance ✔️  
+- Separação clara por camadas e responsabilidades (controller, service, repository) ✔️  
+- Aplicação real de arquitetura limpa em projetos REST ✔️  
+- Deploy de aplicações backend com banco de dados no **Railway** ✔️  
+- Integração com Postman para testes completos dos endpoints ✔️
+
+---
+##  Modelo Conceitual
+
+A estrutura do domínio foi modelada com foco na organização e reordenação de jogos:
+
+- **Game**: entidade principal contendo título, capa, descrição, gênero e outras propriedades do jogo
+- **GameList**: lista personalizada de jogos, criada para organizar preferências do usuário
+- **BelongsTo**: entidade de associação entre `Game` e `GameList`, com um atributo de `position` que indica a ordem do jogo dentro da lista
+
+##  Tecnologias Utilizadas
+
+| Tecnologia       | Descrição                                        |
+|------------------|--------------------------------------------------|
+| **Java 21**       | Linguagem principal da aplicação                 |
+| **Spring Boot 3** | Framework para criação de APIs REST              |
+| **Spring Data JPA / Hibernate** | Persistência e ORM                      |
+| **PostgreSQL**    | Banco de dados relacional                       |
+| **Docker**        | Containerização do banco de dados
 
 ---
 
-> 📢 Projeto focado em backend com Java + Spring Boot, com deploy no Railway e suporte completo a reordenação de listas de jogos.
-
----
-
-## 🔎 Sobre o Projeto
-
-O **GameList** é uma API REST que permite a gestão de listas personalizadas de jogos, com visualização, organização e reordenação de jogos cadastrados.
-
-O projeto foi desenvolvido com foco em boas práticas, organização em camadas e arquitetura limpa.
-
----
-
-## 🧩 Funcionalidades
-
-- 🔍 Visualizar todos os jogos cadastrados  
-- 📝 Criar e gerenciar listas de jogos  
-- 🔄 Reordenar jogos dentro de uma lista  
-- 🔗 Associação entre jogos e listas via entidade intermediária  
-- ✅ Separação por camadas: Controller, Service, Repository  
-
----
-
-## 🧱 Modelo Conceitual
-
-O modelo de domínio contém:
-
-- **Game**: entidade principal com título, capa, gênero, descrição, etc  
-- **GameList**: coleção personalizada de jogos criada pelo usuário  
-- **BelongsTo**: relação entre `Game` e `GameList`, com posição (posição do jogo na lista)
-
-
-
----
-
-## 🧰 Tecnologias Utilizadas
-
-- Java 21  
-- Spring Boot  
-- Spring Data JPA / Hibernate  
-- PostgreSQL  
-- Docker  
-- Maven  
-- API REST  
-
----
-
-## ⚙️ Como Executar Localmente
-
-### Pré-requisitos
-- JDK 21+  
-- PostgreSQL rodando localmente  
-- Maven instalado (ou use `./mvnw`)
-
-### Passos
-
-```bash
-# Clone o repositório
-git clone https://github.com/gustavokowallski/GameList.git
-cd GameList
-```
-# Execute a aplicação
-```bash
-./mvnw spring-boot:run
-```
-
-    O projeto será executado em `http://localhost:8080` por padrão. (Mais abaixo tem o link do Postman para teste, apenas troque a URL para a local).
-
-## Deploy
-
-Esta aplicação está deployada e acessível publicamente através do **Railway**.
-
-**URL da API:** [https://dslist-production-55f3.up.railway.app](https://dslist-production-55f3.up.railway.app)
-
-## Testando a API
-
-Você pode testar os endpoints da API utilizando esta coleção pública do Postman:
-
-[**Coleção Postman GameList API**](https://nawszera.postman.co/workspace/nawszera's-Workspace~ea6779bc-203d-4c77-8395-e87a3f1091fa/collection/45108000-b29a0724-66f5-4da8-9db4-0e085172f89d?action=share&source=copy-link&creator=45108000)
-
-**Instruções para usar a coleção:**
-
-1.  Acesse o link da coleção.
-2.  Clique em "Fork Collection" para importar a coleção para sua própria workspace no Postman.
-3.  Certifique-se de que a variável de ambiente `baseUrl` (ou similar) na coleção esteja configurada para a URL do seu deploy: `https://dslist-production-55f3.up.railway.app`
-4.  Execute as requisições para testar as funcionalidades da API.
-
----
-
-## 👨‍💻 Autor
-
-**Gustavo Eiji Kowalski Hatada**  
-[![LinkedIn Badge](https://img.shields.io/badge/-Gustavo%20Kowalski-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/gustavokowalski/)
-
+📬 Conecte-se comigo 
+  <a href="https://www.linkedin.com/in/gustavokowalski/" target="_blank">LinkedIn</a> | 
+  <a href="mailto:kkowalskigustavo@gmail.com">Email</a>
