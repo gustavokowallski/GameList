@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.games.personal.dto.GameListDTO;
 import project.games.personal.entities.GameList;
+import project.games.personal.exception.ConflictException;
 import project.games.personal.projections.GameMinProjection;
 import project.games.personal.repository.GameListRepository;
 import project.games.personal.repository.GameRepository;
@@ -28,19 +29,20 @@ public class GameListService {
     }
     @Transactional
     public void movePosition(Long listId, int sourceIndex, int destinationIndex){
-
-        List<GameMinProjection> list = gameRepository.searchByList(listId);
-        GameMinProjection obj = list.remove(sourceIndex);
-        list.add(destinationIndex, obj);
-
-        int min = sourceIndex < destinationIndex ? sourceIndex : destinationIndex;
-        int max = sourceIndex < destinationIndex ? destinationIndex : sourceIndex;
-
-        for (int i = min; i <= max; i++){
-
-            gameListRepository.updateBelongingPosition(listId, list.get(i).getId(), i);
+        if(sourceIndex == destinationIndex){
+            throw new ConflictException("Positions cant be same");
         }
 
+        List<GameMinProjection> list = gameRepository.searchByList(listId);
+        GameMinProjection index = list.remove(sourceIndex);
+        list.add(destinationIndex, index);
+
+        int min = Math.min(sourceIndex, destinationIndex);
+        int max = Math.max(sourceIndex, destinationIndex);
+
+        for (int i = min; i <= max; i++){
+            gameListRepository.updateBelongingPosition(listId, list.get(i).getId(), i);
+        }
     }
 
 

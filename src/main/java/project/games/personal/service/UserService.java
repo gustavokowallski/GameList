@@ -38,9 +38,7 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("Email not found");
         }
 
-        User user = new User();
-        user.setEmail(result.get(0).getUsername());
-        user.setPassword(result.get(0).getPassword());
+        User user = new User(result.getFirst().getUsername(), result.getFirst().getPassword(),result.getFirst().getPassword());
         for (UserDetailsProjection projection : result) {
             user.addRole(new Role(projection.getRoleId(), projection.getAuthority()));
         }
@@ -56,9 +54,6 @@ public class UserService implements UserDetailsService {
         }
         User user = UserMapper.toEntity(dto);
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
-
-        Role role = new Role(1L, "ROLE_USER");
-        user.addRole(role);
 
         return UserMapper
                 .toDto(userRepository.save(user));

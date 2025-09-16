@@ -1,5 +1,6 @@
 package project.games.personal.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,20 +21,21 @@ public class GameListController {
     @Autowired
     private GameService gameService;
 
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping
     public ResponseEntity<List<GameListDTO>> findAll() {
         List<GameListDTO> result = gameListService.findAll();
         return ResponseEntity.ok(result);
     }
-
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping(value = "/{listId}/games")
     public ResponseEntity<List<GameMinDTO>> findByList(@PathVariable Long listId) {
         List<GameMinDTO> result = gameService.findByList(listId);
         return ResponseEntity.ok(result);
     }
-
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping(value = "/{listId}/replacement")
     public ResponseEntity<Void> replacePosition(@PathVariable Long listId, @RequestBody ReplacementDTO source) {
