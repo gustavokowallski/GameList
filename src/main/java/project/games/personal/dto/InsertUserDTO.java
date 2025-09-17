@@ -5,12 +5,12 @@ import jakarta.validation.constraints.NotBlank;
 
 public class InsertUserDTO {
 
-    @NotBlank(message = "O e-mail é obrigatório")
+    @NotBlank(message = "Name cannot be empty")
     private String name;
     @NotBlank(message = "Email cannot be empty")
     @Email(message = "Invalid Format")
     private String email;
-    @NotBlank(message = "A senha é obrigatória")
+    @NotBlank(message = "Password cannot be empty")
     private String password;
 
     public InsertUserDTO(){

@@ -23,10 +23,6 @@ public class JwtTokenProvider {
 
     private Algorithm algorithm;
 
-    private Date =
-
-
-
     public String createToken(String username, Collection<? extends GrantedAuthority> roles) {
         algorithm = Algorithm.HMAC256(secret);
         Date expiry = new Date(+ expiration);

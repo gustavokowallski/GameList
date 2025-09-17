@@ -30,11 +30,26 @@ public class ResourceExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ValidationError> handleValidationError(MethodArgumentNotValidException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+        return buildValidationResponse(status, e, request);
+    }
+
+    private ResponseEntity<StandardError> buildStandardResponse(HttpStatus status, Exception e, HttpServletRequest request) {
+        StandardError error = new StandardError(
+                Instant.now(),
+                status.value(),
+                "Error",
+                e.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(status).body(error);
+    }
+
+    private ResponseEntity<ValidationError> buildValidationResponse(HttpStatus status, MethodArgumentNotValidException e, HttpServletRequest request) {
         ValidationError err = new ValidationError(
                 Instant.now(),
                 status.value(),
-                status.getReasonPhrase(),
-                e.getMessage(),
+                "Validation Error",
+                "Invalid data",
                 request.getRequestURI()
         );
         for (FieldError f : e.getBindingResult().getFieldErrors()) {
@@ -42,17 +57,6 @@ public class ResourceExceptionHandler {
         }
 
         return ResponseEntity.status(status).body(err);
-    }
-
-    private ResponseEntity<StandardError> buildStandardResponse(HttpStatus status, Exception e, HttpServletRequest request) {
-        StandardError error = new StandardError(
-                Instant.now(),
-                status.value(),
-                status.getReasonPhrase(),
-                e.getMessage(),
-                request.getRequestURI()
-        );
-        return ResponseEntity.status(status).body(error);
     }
 
 
