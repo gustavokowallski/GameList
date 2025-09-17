@@ -29,7 +29,6 @@ No entanto, não havia:
 - Tratamento de exceções estruturado
 - Validações adequadas dos dados
 - Separação total de responsabilidades (camadas estavam acopladas)
-- Cobertura com testes automatizados
 
 
 
@@ -41,7 +40,6 @@ A nova versão do projeto evoluiu para um backend **muito mais robusto e alinhad
 -  Aplicação de princípios **SOLID** ✔️
 -  **Validações automáticas** com Bean Validation (`@NotNull`, `@Size`, etc.) ✔️
 -  **Tratamento global de erros** via `@ControllerAdvice` ✔️
--  **Testes unitários** com foco em regras de negócio ✔️
 -  Estrutura pronta para evoluir com novas features ✔️
 
 > 🔄 Essa refatoração não apenas elevou a qualidade do projeto, como também mostra meu domínio crescente sobre boas práticas, testes, e design limpo em aplicações reais com Spring Boot.
