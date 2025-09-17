@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.games.personal.dto.GameListDTO;
+import project.games.personal.dto.ReplacementDTO;
 import project.games.personal.entities.GameList;
 import project.games.personal.exception.ConflictException;
 import project.games.personal.projections.GameMinProjection;
@@ -27,24 +28,27 @@ public class GameListService {
         List<GameList> result = gameListRepository.findAll();
         return result.stream().map(GameListDTO::new).toList();
     }
+
     @Transactional
-    public void movePosition(Long listId, int sourceIndex, int destinationIndex){
-        if(sourceIndex == destinationIndex){
-            throw new ConflictException("Positions cant be same");
+    public void movePosition(Long listId, ReplacementDTO dto){
+
+
+        List<GameMinProjection> orderedGames = gameRepository.searchByList(listId);
+
+        GameMinProjection movedGame = orderedGames.remove(dto.getSourceIndex());
+        orderedGames.add(dto.getDestinationIndex(), movedGame);
+
+        updatePositions(listId, orderedGames, dto.getSourceIndex(), dto.getDestinationIndex());
         }
 
-        List<GameMinProjection> list = gameRepository.searchByList(listId);
-        GameMinProjection index = list.remove(sourceIndex);
-        list.add(destinationIndex, index);
-
+    private void updatePositions(Long listId, List<GameMinProjection> games, int sourceIndex, int destinationIndex) {
         int min = Math.min(sourceIndex, destinationIndex);
         int max = Math.max(sourceIndex, destinationIndex);
 
-        for (int i = min; i <= max; i++){
-            gameListRepository.updateBelongingPosition(listId, list.get(i).getId(), i);
+        for (int i = min; i <= max; i++) {
+            gameListRepository.updateBelongingPosition(listId, games.get(i).getId(), i);
         }
+
     }
-
-
-
 }
+

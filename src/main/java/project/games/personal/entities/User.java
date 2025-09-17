@@ -44,7 +44,7 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public void setPassword(String password) {
+    public void updatePassword(String password) {
         this.password = password;
     }
 

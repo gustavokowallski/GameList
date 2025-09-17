@@ -39,7 +39,7 @@ public class GameListController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping(value = "/{listId}/replacement")
     public ResponseEntity<Void> replacePosition(@PathVariable Long listId, @RequestBody ReplacementDTO source) {
-        gameListService.movePosition(listId, source.getSourceIndex(), source.getDestinationIndex());
+        gameListService.movePosition(listId, source);
         return ResponseEntity.noContent().build();
     }
 

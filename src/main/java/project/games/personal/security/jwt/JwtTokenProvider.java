@@ -23,19 +23,18 @@ public class JwtTokenProvider {
 
     private Algorithm algorithm;
 
-    @PostConstruct
-    public void init() {
-        algorithm = Algorithm.HMAC256(secret);
-    }
+    private Date =
+
+
 
     public String createToken(String username, Collection<? extends GrantedAuthority> roles) {
-        Date now = new Date();
-        Date expiry = new Date(now.getTime() + expiration);
+        algorithm = Algorithm.HMAC256(secret);
+        Date expiry = new Date(+ expiration);
 
         return JWT.create()
                 .withSubject(username)
                 .withClaim("roles", roles.stream().map(GrantedAuthority::getAuthority).toList())
-                .withIssuedAt(now)
+                .withIssuedAt(new Date())
                 .withExpiresAt(expiry)
                 .sign(algorithm);
     }

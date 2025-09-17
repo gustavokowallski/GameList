@@ -1,0 +1,9 @@
+#USANDO AWS LINUX
+
+#Instalar docker na maquina
+sudo yum install docker
+
+#Iniciliza serviço do docker
+sudo service docker start
+
+

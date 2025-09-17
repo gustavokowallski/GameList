@@ -29,10 +29,7 @@ public class AuthService {
         String token = jwtProvider.createToken(dto.getEmail(), auth.getAuthorities());
         Instant expires = Instant.now().plusMillis(jwtProvider.getValidityMs());
 
-
-        return new TokenDTO(dto.getEmail(),
-                token, Instant.now(),
-                expires);
+        return new TokenDTO(dto.getEmail(), token, expires);
     }
 
 

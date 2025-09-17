@@ -50,6 +50,8 @@ spring:
     password: ${DB_PASSWORD}
 
   jpa:
+    hibernate:
+      ddl-auto: create
     show-sql: false
     properties:
       hibernate:

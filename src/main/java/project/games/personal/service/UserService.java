@@ -50,10 +50,9 @@ public class UserService implements UserDetailsService {
     public UserDTO createUser(InsertUserDTO dto){
         if(userRepository.findByEmail(dto.getEmail()).isPresent()){
             throw new ConflictException("Email already exists");
-
         }
         User user = UserMapper.toEntity(dto);
-        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        user.updatePassword(passwordEncoder.encode(dto.getPassword()));
 
         return UserMapper
                 .toDto(userRepository.save(user));

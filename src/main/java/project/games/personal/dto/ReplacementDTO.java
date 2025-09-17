@@ -13,7 +13,7 @@ public class ReplacementDTO {
         this.destinationIndex = destinationIndex;
     }
 
-    public Integer getSourceIndex() {
+    public int getSourceIndex() {
         return sourceIndex;
     }
 
