@@ -15,27 +15,26 @@ import java.time.Instant;
 public class ResourceExceptionHandler {
 
     @ExceptionHandler(ConflictException.class)
-    public ResponseEntity<StandardError> handlerConflictException(ConflictException e, HttpServletRequest request) {
-        HttpStatus status = HttpStatus.CONFLICT;
-        StandardError err = new StandardError();
-        err.setTimestamp(Instant.now());
-        err.setStatus(status.value());
-        err.setError("Conflict");
-        err.setMessage(e.getMessage());
-        err.setPath(request.getRequestURI());
-        return ResponseEntity.status(status).body(err);
+    public ResponseEntity<StandardError> handleConflict(ConflictException e, HttpServletRequest request) {
+        return buildResponse(HttpStatus.CONFLICT, e, request);
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<StandardError> handlerResourceNotFoundException(ResourceNotFoundException e, HttpServletRequest request) {
-        HttpStatus status = HttpStatus.NOT_FOUND;
-        StandardError err = new StandardError();
-        err.setTimestamp(Instant.now());
-        err.setStatus(status.value());
-        err.setError("Conflict");
-        err.setMessage(e.getMessage());
-        err.setPath(request.getRequestURI());
-        return ResponseEntity.status(status).body(err);
+    public ResponseEntity<StandardError> handleNotFound(ResourceNotFoundException e, HttpServletRequest request) {
+        return buildResponse(HttpStatus.NOT_FOUND, e, request);
     }
 
+    private ResponseEntity<StandardError> buildResponse(HttpStatus status, Exception e, HttpServletRequest request) {
+        StandardError error = new StandardError(
+                Instant.now(),
+                status.value(),
+                status.getReasonPhrase(),
+                e.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(status).body(error);
+    }
 }
+
+
+
