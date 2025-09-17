@@ -20,7 +20,6 @@ public class GameMapper {
                 game.getShortDescription());
 
     }
-
     public static GameMinDTO projectionToMinDto(GameMinProjection game){
         return new GameMinDTO(game.getId(),
                 game.getTitle(),

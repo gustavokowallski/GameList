@@ -1,5 +1,6 @@
 package project.games.personal.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +20,9 @@ public class AuthController {
         this.authService = authService;
     }
 
+
     @PostMapping("/login")
-    public ResponseEntity<TokenDTO> login(@RequestBody AccountCredentialsDTO dto) {
+    public ResponseEntity<TokenDTO> login(@Valid @RequestBody AccountCredentialsDTO dto) {
         TokenDTO tokenDTO = authService.login(dto);
         return ResponseEntity.ok(tokenDTO);
     }

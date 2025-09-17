@@ -1,9 +1,13 @@
 package project.games.personal.dto.security;
 
+import jakarta.validation.constraints.NotBlank;
+
 import java.io.Serializable;
 
 public class AccountCredentialsDTO implements Serializable {
+    @NotBlank(message = "Email cant be null")
     private String email;
+    @NotBlank(message = "Password cant be null")
     private String password;
 
     public AccountCredentialsDTO(){}
@@ -17,15 +21,7 @@ public class AccountCredentialsDTO implements Serializable {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

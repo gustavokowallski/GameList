@@ -4,7 +4,6 @@ import project.games.personal.projections.GameMinProjection;
 
 public class GameMinDTO {
 
-
     private Long id;
 
     private String title;

@@ -1,5 +1,6 @@
 package project.games.personal.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<UserDTO> createUser(@RequestBody InsertUserDTO dto){
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody InsertUserDTO dto){
         UserDTO result = userService.createUser(dto);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
