@@ -12,3 +12,6 @@ docker push  nawszera/gamelistap (nome da tag do lado)
 #comando para container no aws linux
 sudo docker run --name nome do container -e APP_PROFILE=prod -e DB_URL=NOME DO SEU DB -e DB_USERNAME=postgres -e DB_PASSWORD=postgres -p 8080:8080 -p 9090:9090 nawszera/gamelistapi
 
+sudo docker run --name nome do container -e APP_PROFILE=prod -e DB_URL=NOME DO SEU DB -e DB_USERNAME=postgres -e DB_PASSWORD=postgres -p 8080:8080 -p 9090:9090 nawszera/gamelistapi
+
+

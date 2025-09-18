@@ -8,10 +8,10 @@ import project.games.personal.entities.User;
 public class UserMapper {
 
     public static User toEntity(InsertUserDTO dto){
-        User user = new User();
-        user.setName(dto.getName());
-        user.setEmail(dto.getEmail());
-        return user;
+        return new User(
+                dto.getName(),
+                dto.getEmail()
+        );
     }
 
     public static UserDTO toDto(User user){

@@ -38,7 +38,7 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("Email not found");
         }
 
-        User user = new User(result.getFirst().getUsername(), result.getFirst().getPassword(),result.getFirst().getPassword());
+        User user = new User(result.getFirst().getUsername(), result.getFirst().getPassword());
         for (UserDetailsProjection projection : result) {
             user.addRole(new Role(projection.getRoleId(), projection.getAuthority()));
         }

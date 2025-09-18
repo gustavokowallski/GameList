@@ -29,10 +29,9 @@ public class User implements UserDetails {
 
     public User(){}
 
-    public User( String name, String email, String password) {
+    public User(String name, String email) {
         this.name = name;
         this.email = email;
-        this.password = password;
         this.roles.add(new Role(1L, "'ROLE_USER')"));
     }
 
@@ -40,9 +39,6 @@ public class User implements UserDetails {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public void updatePassword(String password) {
         this.password = password;
@@ -52,17 +48,12 @@ public class User implements UserDetails {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
 
     @Override

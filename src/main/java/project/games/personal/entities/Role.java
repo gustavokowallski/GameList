@@ -22,13 +22,7 @@ public class Role implements GrantedAuthority {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
-    }
 
 
     @Override
