@@ -24,17 +24,13 @@ public class Belonging {
         return id;
     }
 
-    public void setId(BelongPK id) {
-        this.id = id;
-    }
+
 
     public Integer getPosition() {
         return position;
     }
 
-    public void setPosition(Integer position) {
-        this.position = position;
-    }
+
 
     @Override
     public boolean equals(Object o) {
