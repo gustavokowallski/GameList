@@ -9,7 +9,6 @@ Aplicação backend para organização de listas de jogos, desenvolvida com foco
   </a>
 </p>
 <p align="center">
-<img src="https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Deploy-Railway-purple?style=for-the-badge" />
   <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" />
 </p>
@@ -37,12 +36,13 @@ No entanto, não havia:
 A nova versão do projeto evoluiu para um backend **muito mais robusto e alinhado com padrões profissionais**, incluindo:
 
 -  Arquitetura em **camadas bem definidas** (`Controller`, `Service`, `DTO`, `Exception`, `Mapper`) ✔️
--  Aplicação de princípios **SOLID** ✔️
 -  **Validações automáticas** com Bean Validation (`@NotNull`, `@Size`, etc.) ✔️
 -  **Tratamento global de erros** via `@ControllerAdvice` ✔️
+-  Sistema de segurança utilizando SpringSecurity e tokens JWT ✔️
 -  Estrutura pronta para evoluir com novas features ✔️
+-  Deploy na AWS com EC2, RDS ✔️
 
-> 🔄 Essa refatoração não apenas elevou a qualidade do projeto, como também mostra meu domínio crescente sobre boas práticas, testes, e design limpo em aplicações reais com Spring Boot.
+> 🔄 Essa refatoração não apenas elevou a qualidade do projeto, como também me permitiu melhorar minhas habilidades em boas práticas e design limpo em aplicações reais com Spring Boot.
 
 ##  Aprendizados Técnicos
 
@@ -50,7 +50,8 @@ A nova versão do projeto evoluiu para um backend **muito mais robusto e alinhad
 - Uso de projeções com Spring Data JPA para melhorar a performance ✔️  
 - Separação clara por camadas e responsabilidades (controller, service, repository) ✔️  
 - Aplicação real de arquitetura limpa em projetos REST ✔️  
-- Deploy de aplicações backend com banco de dados no **Railway** ✔️  
+- Deploy de aplicações backend com banco de dados no **Railway** ✔️
+- Deploy de aplicação backend com máquinas virtuais e banco de dados no **AWS** ✔️  
 - Integração com Postman para testes completos dos endpoints ✔️
 
 ---
